@@ -27,7 +27,7 @@ passport.use(new Strategy(
   }
 ));
 
-app.get('/',
+app.get('/test',
   passport.authenticate('basic', { session: false }),
   function(req, res) {
     res.json({ username: req.user.username, email: req.user.emails[0].value });
