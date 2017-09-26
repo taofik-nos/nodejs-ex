@@ -27,11 +27,7 @@ passport.use(new Strategy(
   }
 ));
 
-app.get('/test',
-  passport.authenticate('basic', { session: false }),
-  function(req, res) {
-    res.json({ username: req.user.username, email: req.user.emails[0].value });
-  });
+
 
 if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
   var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
@@ -93,6 +89,12 @@ app.get('/', function (req, res) {
     res.render('index.html', { pageCountMessage : null});
   }
 });
+
+app.get('/test',
+  passport.authenticate('basic', { session: false }),
+  function(req, res) {
+    res.json({ username: req.user.username, email: req.user.emails[0].value });
+  });
 
 app.get('/pagecount', function (req, res) {
   // try to initialize the db on every request if it's not already
